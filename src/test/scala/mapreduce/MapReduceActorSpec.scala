@@ -6,7 +6,7 @@ import spec.UnitSpec
 
 import scala.collection.mutable.ArrayBuffer
 
-class MapActorSpec(_system: ActorSystem) extends UnitSpec(_system){
+class MapReduceActorSpec(_system: ActorSystem) extends UnitSpec(_system){
 
   def this() = this(ActorSystem("MapReduceActorSpec"))
 
