@@ -1,18 +1,15 @@
 import org.scalatest.{ BeforeAndAfterAll, FlatSpecLike, Matchers }
 import akka.actor.{ Actor, Props, ActorSystem }
 import akka.testkit.{ ImplicitSender, TestKit, TestActorRef }
+import spec.UnitSpec
 import scala.concurrent.duration._
 
 class HelloAkkaSpec(_system: ActorSystem)
-  extends TestKit(_system)
-  with ImplicitSender
-  with Matchers
-  with FlatSpecLike
-  with BeforeAndAfterAll {
+  extends UnitSpec(_system) {
 
   def this() = this(ActorSystem("HelloAkkaSpec"))
 
-  override def afterAll: Unit = {
+  override def afterAll() = {
     system.shutdown()
     system.awaitTermination(10.seconds)
   }
