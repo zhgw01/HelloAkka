@@ -4,6 +4,7 @@ import akka.actor.ActorSystem
 import akka.testkit.TestActorRef
 import spec.UnitSpec
 
+import scala.collection.immutable.HashMap
 import scala.collection.mutable.ArrayBuffer
 
 class MapReduceActorSpec(_system: ActorSystem) extends UnitSpec(_system){
@@ -24,6 +25,19 @@ class MapReduceActorSpec(_system: ActorSystem) extends UnitSpec(_system){
 
     reducer ! mapData
     expectMsg(ReduceData(Map[String, Int]("hello"->1)))
+  }
+
+  "An AggregateActor" should "return ('hello'->2) on receive message ('hello', 1) twice" in {
+
+    val aggregator = TestActorRef[AggregateActor]
+    val reducedList = ReduceData(Map[String, Int]("hello"->1))
+
+    aggregator ! reducedList
+    aggregator ! reducedList
+
+    aggregator ! Result
+
+    expectMsg(HashMap[String, Int]("hello" -> 2).toString())
   }
 
 }
