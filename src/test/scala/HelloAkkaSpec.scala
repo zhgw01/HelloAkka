@@ -22,8 +22,8 @@ class HelloAkkaSpec(_system: ActorSystem)
 
   it should "be able to get a new greeting" in {
     val greeter = system.actorOf(Props[Greeter], "greeter")
-    greeter ! WhoToGreet("testkit")
+    greeter ! WhoToGreet("dan")
     greeter ! Greet
-    expectMsg(Greeting("hello, testkit"))
+    expectMsg(Greeting("hello, dan"))
   }
 }
